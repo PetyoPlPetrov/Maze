@@ -1,8 +1,8 @@
 # Maze
 
 This repository will present an application with 2 core functionalitties:
-    - Creating a maze with a random size and visualizing the shortest path
-    - Playing a game with avatar where the user needs to find the exit. There is a timer and score persistence between games.  
+-   Creating a maze with a random size and visualizing the shortest path
+-   Playing a game with avatar where the user needs to find the exit. There is a timer and score persistence between games.  
 
 The maze is build using Canvas functionality and react-create app boilerplate.
 
