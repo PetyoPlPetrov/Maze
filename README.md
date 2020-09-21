@@ -1,4 +1,4 @@
-# Calendar
+# Maze
 
 This repository will present an application with 2 core functionalitties:
     - Creating a maze with a random size and visualizing the shortest path
@@ -8,7 +8,7 @@ The maze is build using Canvas functionality and react-create app boilerplate.
 
 ## Setting up the project
 
-1. Clone the repository on  branch maze-v1
+1. Clone the repository on  branch master
 
    - the library source code is located into `maze/src` folder
 
