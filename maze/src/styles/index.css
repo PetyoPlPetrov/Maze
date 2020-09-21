@@ -1,0 +1,20 @@
+.flex {
+  display: flex;
+}
+
+.container {
+  margin: 2rem;
+}
+.current {
+  font-weight: bold;
+}
+.center {
+  align-items: center;
+  justify-content: center;
+}
+.start {
+  align-items: flex-start;
+}
+.column {
+  flex-direction: column;
+}
