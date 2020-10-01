@@ -1,6 +1,13 @@
 import React, {useEffect, useMemo, useState} from "react";
 import './styles/index.css'
 import './styles/maze.css'
+import {
+  findShortestPath,
+  delayRestore,
+  Point,
+  unmark,
+  prev,
+} from "./utils/graphUtils";
 
 const Cell = ({top, right, bottom, left})=>{
   return <div
@@ -108,6 +115,10 @@ const App = () => {
 
   },[maze])
   //console.log(walls)
+
+  const onShow = ()=>{
+
+  }
   return (
     <div className='maze-wrapper grid' style={{gridTemplateColumns: `repeat(${y}, 1fr)`,gridTemplateRows: `repeat(${x},1fr)`}}>
       {
@@ -126,6 +137,7 @@ const App = () => {
           })
         })
       }
+      <button onClick={onShow}>Show path</button>
     </div>
   );
 };
