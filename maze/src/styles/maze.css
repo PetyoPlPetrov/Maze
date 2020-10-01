@@ -1,0 +1,25 @@
+
+.maze-wrapper{
+    background-color: black;
+ 
+    /* grid-template-columns: repeat(7, 1fr); */
+    width: 70vh;
+    height: 70vh;
+
+
+}
+.maze-cell{
+    border: 1px solid white;
+}
+.missingTop{
+    border-top: 1px solid black ;
+}
+.missingRight{
+    border-right: 1px solid black ;
+}
+.missingBottom{
+    border-bottom: 1px solid black ;
+}
+.missingLeft{
+    border-left: 1px solid black ;
+}
