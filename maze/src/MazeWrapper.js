@@ -9,9 +9,9 @@ import {
   prev,
 } from "./utils/graphUtils";
 
-const Cell = ({top, right, bottom, left})=>{
+const Cell = ({top, right, bottom, left,heighlight})=>{
   return <div
-   className={`maze-cell ${top?'missingTop':''} ${right?'missingRight':''} ${bottom?'missingBottom':''} ${left?'missingLeft':''}`}
+   className={`maze-cell  ${heighlight? 'heighlight':'eee'} ${top?'missingTop':''} ${right?'missingRight':''} ${bottom?'missingBottom':''} ${left?'missingLeft':''}`}
    
    ></div>
 }
@@ -64,12 +64,20 @@ function removeWalls(cell1, cell2,walls){
   }
 
 }
-
-const x = 4;
-const y = 12;
+const mark = (el,highligted,set,prev)=>{
+  if (el === null) {
+    return;
+  }
+  highligted[el[0]][el[1]]=true;
+  set([...highligted]);
+  setTimeout(()=>mark(prev[`${el[0]},${el[1]}`],highligted,set,prev),100)
+}
+const x = 6;
+const y = 9;
 
 const App = () => {
   const [walls, setWalls] = useState( Array(x).fill('').map(()=>Array(y).fill('')))
+  const [highligted, setHighligted] = useState( Array(x).fill(false).map(()=>Array(y).fill(false)))
   const maze = useMemo(()=>[...Array(x).keys()].map((row)=>{
     return [...Array(y).keys()].map(col=> [row,col])
   }),[])
@@ -99,8 +107,8 @@ const App = () => {
 
       //remove wall
         removeWalls(current, randomNeighboor,missingWalls)
-        console.log(missingWalls)
-        console.log(visited)
+        // console.log(missingWalls)
+        // console.log(visited)
       //mark as visited
       visited[randomNeighboor[0]][randomNeighboor[1]]=true;
 
@@ -109,25 +117,33 @@ const App = () => {
       //stack=[]
 
     }
-     console.log(visited)
+     //console.log(visited)
     // console.log(missingWalls)
     setWalls(missingWalls)
 
   },[maze])
-  //console.log(walls)
 
   const onShow = ()=>{
+    var source = new Point(0, 0);
+    var dest = new Point(x - 1, y - 1);
 
+    findShortestPath(maze, source, dest,walls);
+
+    let curr = prev[`${dest.x},${dest.y}`];
+    highligted[x-1][y-1]=true
+    mark(curr,highligted,setHighligted,prev)
+    
   }
-  return (
+
+  return (<>
     <div className='maze-wrapper grid' style={{gridTemplateColumns: `repeat(${y}, 1fr)`,gridTemplateRows: `repeat(${x},1fr)`}}>
       {
         maze.map(cells=>{
           return cells.map((cell,i)=>{
               const missingBorders = walls[cell[0]][cell[1]]
-              console.log(missingBorders);
 
-            return <Cell 
+              return <Cell
+            heighlight={highligted[cell[0]][cell[1]]} 
             key={cell.toString()} 
             top={missingBorders.includes('top')}
             bottom={missingBorders.includes('bottom')}
@@ -137,8 +153,10 @@ const App = () => {
           })
         })
       }
-      <button onClick={onShow}>Show path</button>
     </div>
+    <button onClick={onShow}>Show path</button>
+
+    </>
   );
 };
 
