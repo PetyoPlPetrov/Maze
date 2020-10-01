@@ -3,13 +3,16 @@
     background-color: black;
  
     /* grid-template-columns: repeat(7, 1fr); */
-    width: 70vh;
-    height: 70vh;
+    width: 80vh;
+    height: 80vh;
 
 
 }
 .maze-cell{
     border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .missingTop{
     border-top: 1px solid black ;
@@ -25,4 +28,10 @@
 }
 .heighlight{
     background-color: brown;
+    border-radius: 6em;
+    width: 50%;
+    height: 50%; 
+    border: 1px solid white;
+   
+  
 }

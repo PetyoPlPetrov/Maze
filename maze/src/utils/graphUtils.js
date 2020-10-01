@@ -28,7 +28,7 @@ export function findShortestPath(maze, src, dest, walls) {
 
     var point = curr.point;
     if (point.x === dest.x && point.y === dest.y) {
-      return;
+      return prev
     }
     let currentCell = maze[point.x][point.y];
     let row = currentCell[0];
@@ -76,7 +76,7 @@ export function findShortestPath(maze, src, dest, walls) {
     }
   }
 
-  return;
+  return prev
 }
 
 export function Point(x, y) {
