@@ -6,9 +6,9 @@ import {
   Point,
   findUnvisitedNeighboors,
   removeWalls,
-  mark
+  mark,
 } from "./utils/graphUtils";
-import Cell from './components/Cell'
+import Cell from "./components/Cell";
 
 const x = 22;
 const y = 30;
@@ -73,7 +73,7 @@ const App = () => {
     var source = new Point(0, 0);
     var dest = new Point(x - 1, y - 1);
 
-  let prev = findShortestPath(maze, source, dest, walls);
+    let prev = findShortestPath(maze, source, dest, walls);
 
     let curr = prev[`${dest.x},${dest.y}`];
     highligted[x - 1][y - 1] = true;
@@ -107,9 +107,17 @@ const App = () => {
         })}
       </div>
       <button onClick={onShow}>Show path</button>
-      <button onClick={()=> setHighligted(  Array(x)
-        .fill(false)
-        .map(() => Array(y).fill(false)))}>Hide path</button>
+      <button
+        onClick={() =>
+          setHighligted(
+            Array(x)
+              .fill(false)
+              .map(() => Array(y).fill(false))
+          )
+        }
+      >
+        Hide path
+      </button>
     </>
   );
 };

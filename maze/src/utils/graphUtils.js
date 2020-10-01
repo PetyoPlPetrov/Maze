@@ -21,34 +21,30 @@ export function findShortestPath(maze, src, dest, walls) {
   var s = new Node(src, 0);
   queue.push(s);
   prev[maze[src.x][src.y].toString()] = null;
-  
 
   while (queue.length > 0) {
     var curr = queue.pop();
 
     var point = curr.point;
     if (point.x === dest.x && point.y === dest.y) {
-      return prev
+      return prev;
     }
     let currentCell = maze[point.x][point.y];
     let row = currentCell[0];
     let col = currentCell[1];
 
     var adjCell = null;
-    let dir = walls[currentCell[0]][currentCell[1]]
+    let dir = walls[currentCell[0]][currentCell[1]];
 
-    if (
-      dir.includes('right') &&
-      isValid(maze, visited, h, w, row, col + 1)
-    ) {
+    if (dir.includes("right") && isValid(maze, visited, h, w, row, col + 1)) {
       visited[row][col + 1] = true;
       adjCell = new Node(new Point(row, col + 1), curr.dist + 1);
       queue.push(adjCell);
       prev[maze[row][col + 1].toString()] = maze[row][col];
     }
-    
+
     if (
-      walls[currentCell[0]][currentCell[1]].includes('left') &&
+      walls[currentCell[0]][currentCell[1]].includes("left") &&
       isValid(maze, visited, h, w, row, col - 1)
     ) {
       visited[row][col - 1] = true;
@@ -57,7 +53,7 @@ export function findShortestPath(maze, src, dest, walls) {
       prev[maze[row][col - 1].toString()] = maze[row][col];
     }
     if (
-      walls[currentCell[0]][currentCell[1]].includes('bottom') &&
+      walls[currentCell[0]][currentCell[1]].includes("bottom") &&
       isValid(maze, visited, h, w, row + 1, col)
     ) {
       visited[row + 1][col] = true;
@@ -66,7 +62,7 @@ export function findShortestPath(maze, src, dest, walls) {
       prev[maze[row + 1][col].toString()] = maze[row][col];
     }
     if (
-      walls[currentCell[0]][currentCell[1]].includes('top')&&
+      walls[currentCell[0]][currentCell[1]].includes("top") &&
       isValid(maze, visited, h, w, row - 1, col)
     ) {
       visited[row - 1][col] = true;
@@ -76,7 +72,7 @@ export function findShortestPath(maze, src, dest, walls) {
     }
   }
 
-  return prev
+  return prev;
 }
 
 export function Point(x, y) {
@@ -114,9 +110,6 @@ export function removeWalls(cell1, cell2, walls) {
   let x = cell1[0] - cell2[0];
   let y = cell1[1] - cell2[1];
 
-  // console.log('X',x)
-  // console.log('Y',y)
-
   if (y === 1) {
     walls[cell1[0]][cell1[1]] += " left";
     walls[cell2[0]][cell2[1]] += " right";
@@ -139,5 +132,6 @@ export const mark = (el, highligted, set, prev) => {
   }
   highligted[el[0]][el[1]] = true;
   set([...highligted]);
-  setTimeout(() => mark(prev[`${el[0]},${el[1]}`], highligted, set, prev), 10);
+  //mark(prev[`${el[0]},${el[1]}`], highligted, set, prev)
+  setTimeout(() => mark(prev[`${el[0]},${el[1]}`], highligted, set, prev), 0);
 };

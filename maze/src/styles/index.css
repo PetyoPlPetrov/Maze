@@ -19,7 +19,6 @@
   flex-direction: column;
 }
 
-
-.grid{
+.grid {
   display: grid;
 }
