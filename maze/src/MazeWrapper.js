@@ -4,77 +4,14 @@ import "./styles/maze.css";
 import {
   findShortestPath,
   Point,
+  findUnvisitedNeighboors,
+  removeWalls,
+  mark
 } from "./utils/graphUtils";
+import Cell from './components/Cell'
 
-const Cell = ({ top, right, bottom, left, heighlight }) => {
-  return (
-    <div
-      className={`maze-cell ${
-        top ? "missingTop" : ""
-      } ${right ? "missingRight" : ""} ${bottom ? "missingBottom" : ""} ${
-        left ? "missingLeft" : ""
-      }`}
-      
-    >
-    <div className={`  ${heighlight ? "heighlight" : "eee"}`}></div>
-    </div>
-  );
-};
-
-function findUnvisitedNeighboors([row, col], grid, visited) {
-  let neighbors = [];
-  let top = row !== 0 ? grid[row - 1][col] : undefined;
-  let right = col !== grid[0].length - 1 ? grid[row][col + 1] : undefined;
-  let bottom = row !== grid.length - 1 ? grid[row + 1][col] : undefined;
-  let left = col !== 0 ? grid[row][col - 1] : undefined;
-  if (top !== undefined && !visited[top[0]][top[1]]) {
-    neighbors.push(top);
-  }
-  if (right !== undefined && !visited[right[0]][right[1]]) {
-    neighbors.push(right);
-  }
-  if (bottom !== undefined && !visited[bottom[0]][bottom[1]]) {
-    neighbors.push(bottom);
-  }
-  if (left !== undefined && !visited[left[0]][left[1]]) {
-    neighbors.push(left);
-  }
-  return neighbors;
-}
-
-function removeWalls(cell1, cell2, walls) {
-  let x = cell1[0] - cell2[0];
-  let y = cell1[1] - cell2[1];
-
-  // console.log('X',x)
-  // console.log('Y',y)
-
-  if (y === 1) {
-    walls[cell1[0]][cell1[1]] += " left";
-    walls[cell2[0]][cell2[1]] += " right";
-  } else if (y === -1) {
-    walls[cell1[0]][cell1[1]] += " right";
-    walls[cell2[0]][cell2[1]] += " left";
-  }
-
-  if (x === 1) {
-    walls[cell1[0]][cell1[1]] += " top";
-    walls[cell2[0]][cell2[1]] += " bottom";
-  } else if (x === -1) {
-    walls[cell1[0]][cell1[1]] += " bottom";
-    walls[cell2[0]][cell2[1]] += " top";
-  }
-}
-const mark = (el, highligted, set, prev) => {
-  if (el === null) {
-    return;
-  }
-  highligted[el[0]][el[1]] = true;
-  set([...highligted]);
-  setTimeout(() => mark(prev[`${el[0]},${el[1]}`], highligted, set, prev), 10);
-};
-const x = 15;
-const y = 22;
+const x = 22;
+const y = 30;
 
 const App = () => {
   const [walls, setWalls] = useState(
