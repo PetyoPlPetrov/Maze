@@ -10,8 +10,8 @@ import {
 } from "./utils/graphUtils";
 import Cell from "./components/Cell";
 
-const x = 22;
-const y = 30;
+const x = 16;
+const y = 19  ;
 
 const App = () => {
   const [walls, setWalls] = useState(
@@ -95,6 +95,8 @@ const App = () => {
 
             return (
               <Cell
+                first={cell[0]==0&& cell[1]===0}
+                last={cell[0]==x-1&& cell[1]===y-1}
                 heighlight={highligted[cell[0]][cell[1]]}
                 key={cell.toString()}
                 top={missingBorders.includes("top")}
