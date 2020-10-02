@@ -23,7 +23,9 @@
 .missingLeft {
   border-left: 1px solid black;
 }
-.heighlight,.first,.last {
+.heighlight,
+.first,
+.last {
   background-color: brown;
   width: 50%;
   height: 50%;

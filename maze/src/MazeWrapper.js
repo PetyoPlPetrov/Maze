@@ -10,36 +10,27 @@ import {
 } from "./utils/graphUtils";
 import Cell from "./components/Cell";
 
-const x = 16;
-const y = 19  ;
+const x = 26;
+const y = 35;
+const createEmptyMatrix = (x, y, fill) =>
+  Array(x)
+    .fill(fill)
+    .map(() => Array(y).fill(fill));
+
+const createMatrix = () =>
+  [...Array(x).keys()].map((row) => {
+    return [...Array(y).keys()].map((col) => [row, col]);
+  });
 
 const App = () => {
-  const [walls, setWalls] = useState(
-    Array(x)
-      .fill("")
-      .map(() => Array(y).fill(""))
-  );
-  const [highligted, setHighligted] = useState(
-    Array(x)
-      .fill(false)
-      .map(() => Array(y).fill(false))
-  );
-  const maze = useMemo(
-    () =>
-      [...Array(x).keys()].map((row) => {
-        return [...Array(y).keys()].map((col) => [row, col]);
-      }),
-    []
-  );
+  const [walls, setWalls] = useState(createEmptyMatrix(x, y, ""));
+  const [highligted, setHighligted] = useState(createEmptyMatrix(x, y, false));
+  const maze = useMemo(createMatrix, []);
 
   useEffect(() => {
     let stack = [];
-    let visited = Array(x)
-      .fill()
-      .map(() => Array(y).fill());
-    let missingWalls = Array(x)
-      .fill("")
-      .map(() => Array(y).fill(""));
+    let visited = createEmptyMatrix(x, y);
+    let missingWalls = createEmptyMatrix(x, y, "");
     let start = maze[0][0];
     visited[0][0] = true;
     stack.push(start);
@@ -95,8 +86,8 @@ const App = () => {
 
             return (
               <Cell
-                first={cell[0]==0&& cell[1]===0}
-                last={cell[0]==x-1&& cell[1]===y-1}
+                first={cell[0] === 0 && cell[1] === 0}
+                last={cell[0] === x - 1 && cell[1] === y - 1}
                 heighlight={highligted[cell[0]][cell[1]]}
                 key={cell.toString()}
                 top={missingBorders.includes("top")}
@@ -109,15 +100,7 @@ const App = () => {
         })}
       </div>
       <button onClick={onShow}>Show path</button>
-      <button
-        onClick={() =>
-          setHighligted(
-            Array(x)
-              .fill(false)
-              .map(() => Array(y).fill(false))
-          )
-        }
-      >
+      <button onClick={() => setHighligted(createEmptyMatrix(x, y, false))}>
         Hide path
       </button>
     </>
