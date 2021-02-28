@@ -8,7 +8,7 @@ The maze is build using Canvas functionality and react-create app boilerplate.
 
 ## Setting up the project
 
-1. Clone the repository on  branch master
+1. Clone the repository on the default branch
 
    - the library source code is located into `maze/src` folder
 
